@@ -10,6 +10,7 @@ usage:
 -r number of iterations for ANN search, default=600  
 -l length of tags (subreads placed on reads), default=1200  
 -s average distance between tags, default=600  
+-n number of ANNs per tag, default=40  
 -m minimum allowed distange between tags, default=200  
 -w window size for GC-peaks detection, default=100  
 -i input FASTA file  

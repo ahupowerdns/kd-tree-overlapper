@@ -4,13 +4,7 @@
 #include <tuple>
 #include <string>
 
-#include <seqan/index.h>
-#include <seqan/seq_io.h>
-#include <seqan/stream.h>
-#include <seqan/align.h>
-#include <seqan/graph_align.h>
-#include <seqan/store.h>
-#include <seqan/consensus.h>
+#include <seqan/modifier.h>
 
 #include <sys/time.h>
 #include <unistd.h>

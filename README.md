@@ -1,6 +1,28 @@
 # kd-tree-overlapper
 
-usage: 
+Installation:
+
+1. Get FLANN:
+git clone https://github.com/mariusmuja/flann.git
+
+(If necessary install "cmake")
+2. Compile FLANN libs:
+cd flann
+cmake .
+make
+cd ..
+
+3. Get SeqAn:
+git clone https://github.com/seqan/seqan.git
+
+4. Get kd-tree-overlapper:
+git clone https://github.com/dzif/kd-tree-overlapper.git
+
+4. Compile kd-tree-overlapper:
+cd kd-tree-overlapper
+make
+
+Usage: 
 ./kd [-o output=overlaps.out -k k-mer_len=4 -r kd-tree_iterations=600 
 -l tags_len=1200 -s tags_spacing=600 -n num_NN=40 -m min_tags_space=200 
 -w GC_window=100] [-i] input_file  

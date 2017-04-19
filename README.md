@@ -7,9 +7,9 @@ git clone https://github.com/mariusmuja/flann.git
 
 (If necessary install "cmake")
 2. Compile FLANN libs:
-cd flann
-cmake .
-make
+cd flann;
+cmake .;
+make;
 cd ..
 
 3. Get SeqAn:
@@ -19,7 +19,7 @@ git clone https://github.com/seqan/seqan.git
 git clone https://github.com/dzif/kd-tree-overlapper.git
 
 4. Compile kd-tree-overlapper:
-cd kd-tree-overlapper
+cd kd-tree-overlapper;
 make
 
 Usage: 

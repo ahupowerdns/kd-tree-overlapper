@@ -5,8 +5,7 @@ Installation:
 1. Get FLANN:
 git clone https://github.com/mariusmuja/flann.git
 
-(If necessary install "cmake")
-2. Compile FLANN libs:
+2. Compile FLANN libs (If necessary install "cmake"):
 cd flann;
 cmake .;
 make;
@@ -18,7 +17,7 @@ git clone https://github.com/seqan/seqan.git
 4. Get kd-tree-overlapper:
 git clone https://github.com/dzif/kd-tree-overlapper.git
 
-4. Compile kd-tree-overlapper:
+5. Compile kd-tree-overlapper:
 cd kd-tree-overlapper;
 make
 

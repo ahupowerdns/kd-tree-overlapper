@@ -1,4 +1,4 @@
-###
+/*##
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -13,7 +13,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #    Created on 2016 by Dmitri Parkhomchuk, pdmitri@hotmail.com
-###
+##*/
 
 
 #include <flann/flann.hpp>
@@ -291,7 +291,7 @@ std::multimap<B,A> flip_map(const std::map<A,B> &src)
 
 using namespace std;
 int main(int argc, char** argv)
-{
+{  float version = 1.0;
 	int nn,n_rec,tag_l,tag_sep,n_iter;
 	string f_in, f_out;
 	
@@ -304,12 +304,15 @@ int main(int argc, char** argv)
   char * svalue = NULL;
   char * mvalue = NULL;
   char * wvalue = NULL;
+  char * vvalue = NULL;
   int index;
   int c;
 
+  for (int i = 0; i<argc; ++i)  if (argv[i] == "-v") {return -1;}	
+
   opterr = 0;
 
-  while ((c = getopt (argc, argv, "o:i:r:l:s:n:m:w")) != -1)
+  while ((c = getopt (argc, argv, "o:i:r:l:s:n:m:w:v:")) != -1)
     switch (c)
       {
       case 'o':
@@ -337,8 +340,12 @@ int main(int argc, char** argv)
         wvalue = optarg;
         break;
       case '?':
+	  if (optopt==118) {
+		printf ("KD-tree overlapper, Version %g\n",version);
+		return -1; 
+	  }
           fprintf (stderr,
-                   "Unknown option character `\\x%x'.\n",
+                   "Unknown option for -%c.\n",
                    optopt);
         return 1;
       default:
@@ -348,10 +355,11 @@ int main(int argc, char** argv)
       
      string fn;
       if (argc < 2) {
-	      printf("usage: ./kd [-o output=overlaps.out -k k-mer_len=4 -r kd-tree_iterations=600 -l tags_len=1200 -s tags_spacing=600 -n num_NN=40 -m min_tags_space=200 -w GC_window=100] [-i] input_file  \n");
+	      printf ("KD-tree overlapper, Version %g\n",version);
+	      printf("usage: ./kd [-o output=overlaps.out -k k-mer_len=4 -r kd-tree_iterations=600 -l tags_len=1200 -s tags_spacing=600 -n num_NN=40 -m min_tags_space=200 -w GC_window=100 -v print version and quit] -i input_file  \n");
 	      return -1;
 	      }
-     else fn=argv[argc-1];  
+     
 
 	if (nvalue != NULL) nn = atoi(nvalue);
 	else nn=40;
@@ -378,16 +386,13 @@ int main(int argc, char** argv)
 		}
 	}
 	else {
-		fn=argv[argc-1];
-		ifstream f(fn.c_str());
-		if (!f.good()) {
-			printf("Input file %s is not good\n",fn.c_str());
-			return -1;
-		}
+		printf("No input file provided.\n");
+		return -1;
+		
 	}
    
-	printf ("input: %s, output: %s, k_len = %d , tags_len = %d, tags_dens = %d, n_iter = %d\n",
-          fn.c_str(), f_out.c_str(), klen, lf_len, tags_div, n_iter);
+	printf ("KD-tree overlapper, Version %g \ninput: %s, output: %s, k_len = %d , tags_len = %d, tags_dens = %d, n_iter = %d\n",
+          version,fn.c_str(), f_out.c_str(), klen, lf_len, tags_div, n_iter);
     
 	fp = gzopen(fn.c_str(), "r");
 	seq = kseq_init(fp);

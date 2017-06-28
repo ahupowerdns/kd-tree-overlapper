@@ -351,7 +351,14 @@ int main(int argc, char** argv)
 	else cg_win=100;
 	if (ovalue != NULL) f_out=ovalue;
 	else f_out="overlaps.out";
-	if (ivalue != NULL) fn=ivalue;
+	if (ivalue != NULL) {
+		fn=ivalue;
+		ifstream f(fn.c_str());
+		if (!f.good()) {
+			printf("Input file %s is not good\n",fn.c_str());
+			return -1;
+		}
+	}
 	else {
 		fn=argv[argc-1];
 		ifstream f(fn.c_str());

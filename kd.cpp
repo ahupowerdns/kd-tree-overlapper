@@ -1,20 +1,18 @@
-/*##
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#    Created on 2016 by Dmitri Parkhomchuk, pdmitri@hotmail.com
-##*/
-
+/**
+ * Copyright 2016-2017 Dmitri Parkhomchuk, DZIF
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+**/
 
 #include <flann/flann.hpp>
 #include <stdio.h>
@@ -270,7 +268,7 @@ flannmat read_fastq(long int n)
 		}
 		++fid;
 	}
-	printf("num reads: %d\n", i);
+	printf("num tags: %d\n", i);
 	loaded_seqs.clear();
 	return data;
 }
@@ -402,7 +400,7 @@ int main(int argc, char** argv)
 	start_timer("Loading fastq...\n");
 	datasets.push_back(read_fastq(ns));
 	
-	printf("Loaded %i reads (%g seconds)\n",ns, stop_timer());
+	printf("Loaded %i tags (%g seconds)\n",ns, stop_timer());
 	
 	flann::SearchParams params(n_iter, 0.0f,true);
 	params.cores = 16; // for multi-cores to work provide the option for GCC "-fopenmp" in the makefile
@@ -412,7 +410,7 @@ int main(int argc, char** argv)
 	kdindex.buildIndex();
 	printf("Created index (%g seconds)\n", stop_timer());
 
-	start_timer("Searching...\n");
+	start_timer("Searching ANNs...\n");
 
 	int ss = ns;
 	flann::Matrix<int> indices(new int[ss*nn],ss,nn);
@@ -422,7 +420,7 @@ int main(int argc, char** argv)
 	printf("Search done (%g seconds)\n", stop_timer());
 
 	printf ("lf_len: %i tags_div %i \n", lf_len, tags_div);
-	start_timer("Assembling initial...\n");
+	start_timer("Filtering overlapping pairs...\n");
 	
 	int hs = 0;
 	

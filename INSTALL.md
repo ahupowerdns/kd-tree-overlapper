@@ -35,7 +35,7 @@ This will place an executable named `kd` in the folder `kd-tree-overlapper`.
 
 ## KD-tree biobox
 
-Following the assembler biobox specification, we provide an overlapper biobox to run as a Docker container.
+Following the assembler biobox specification, we provide an overlapper biobox to run `kd` in a Docker container.
 
 ### Build the Biobox
 

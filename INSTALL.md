@@ -2,7 +2,7 @@
 
 For convenience, we provide a statically linked `kd` binary here: [https://github.com/dzif/kd-tree-overlapper/releases](https://github.com/dzif/kd-tree-overlapper/releases).
 
-Building `kd` from source requires `make` and `cmake` on your system. We have tested `kd` with FLANN v1.9.1 and SeqAn v2.3.2. 
+Building `kd` from source requires `make` and `cmake`. We have tested `kd` with FLANN v1.9.1 and SeqAn v2.3.2. 
 
 ### Install FLANN:
 

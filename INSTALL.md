@@ -6,7 +6,7 @@ For convenience, we provide a statically linked `kd` binary here: [https://githu
 
 Building `kd` from source requires `make` and `cmake`. We have tested `kd` with FLANN v1.9.1 and SeqAn v2.3.2. 
 
-### Install FLANN:
+#### Install FLANN:
 
 ```
 git clone https://github.com/mariusmuja/flann.git
@@ -17,13 +17,13 @@ make;
 cd ..
 ```
 
-### Install SeqAn:
+#### Install SeqAn:
 
 ```
 git clone https://github.com/seqan/seqan.git
 ```
 
-### Install kd-tree-overlapper:
+#### Install kd-tree-overlapper:
 
 ```
 git clone https://github.com/dzif/kd-tree-overlapper.git
@@ -37,13 +37,13 @@ This will place an executable named `kd` in the folder `kd-tree-overlapper`.
 
 Following the assembler biobox specification, we provide an overlapper biobox to run `kd` in a Docker container.
 
-### Build the Biobox
+#### Build the Biobox
 
 ```
 docker build -t kdtree .
 ```
 
-### Run the biobox
+#### Run the biobox
 
 ```
 docker run \

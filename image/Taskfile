@@ -1,0 +1,1 @@
+default: kd -i ${FASTA} -o ${OUTPUT_FILE} 

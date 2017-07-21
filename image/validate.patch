@@ -1,0 +1,11 @@
+--- ../biobox-minimal-base/image/validate_inputs.sh	2017-03-13 19:58:51.691239198 +0100
++++ validate_inputs.sh	2017-07-21 12:47:42.978469507 +0200
+@@ -8,8 +8,6 @@
+ set -o errexit
+ set -o nounset
+ 
+-# Validate the biobox.yaml file before doing anything else
+-validate-biobox-file --schema ${SCHEMA} --input /bbx/input/biobox.yaml
+ 
+ # if /bbx/metadata is mounted create log.txt
+ if [ -d "${METADATA}" ]; then

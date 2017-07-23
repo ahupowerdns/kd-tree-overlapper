@@ -4,6 +4,7 @@ Fast and memory-efficient noisy read overlapping with KD-trees.
 
 Software licensed under the [Apache License 2.0](LICENSE.txt), using the [FLANN](https://github.com/mariusmuja/flann) and [SeqAN](https://github.com/seqan/seqan) software libraries (and including [klib](https://github.com/attractivechaos/klib)'s [kseq.h](kseq.h) to parse FASTA/FASTQ input). Please see [INSTALL.md](INSTALL.md) for instructions how to install `kd`.
 
+
 ### Usage:
 
 ```
@@ -21,3 +22,7 @@ Options:
      -v prints version and quit
      -i input FASTA file
 ```
+
+### Compiling from git
+Checkout FLANN and SeqAN in the parent directory of the kd-tree-overlapper
+git clone. Note that 'FLANN' must be built first.

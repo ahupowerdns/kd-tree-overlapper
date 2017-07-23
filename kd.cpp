@@ -169,8 +169,8 @@ int cg_win;//window for GC-content averaging
 void tag(std::string &dna, std::vector<unsigned int> &rcoo) // tagging on GC-content peaks
 {
 	int wnd = cg_win;
-	int ntags = dna.length()/tags_div;
-	int at = 0, cg = 0, c;
+	unsigned int ntags = dna.length()/tags_div;
+	int at = 0, cg = 0;
 	std::vector<int> prof; // (dna.length() - wnd, 2);
 	for (unsigned int i = 0; i<dna.length() - wnd -1; ++i) {
 		switch(dna.at(i)) {
@@ -192,7 +192,7 @@ void tag(std::string &dna, std::vector<unsigned int> &rcoo) // tagging on GC-con
 	
 	int ofs = -wnd/2;// + lf_len/2;
 	for (auto i: sort_indexes(prof)) {
-		if (int(i) < ofs  or int(i) - ofs > dna.length() - lf_len -1 ) continue;
+          if (int(i) < ofs  or int(i) - ofs > int(dna.length()) - lf_len -1 ) continue;
 		bool f = true;
 		if (rcoo.size() ==0) rcoo.push_back(int(i) - ofs);
 		else {
@@ -290,7 +290,7 @@ std::multimap<B,A> flip_map(const std::map<A,B> &src)
 using namespace std;
 int main(int argc, char** argv)
 {  float version = 1.0;
-	int nn,n_rec,tag_l,tag_sep,n_iter;
+	int nn,n_iter;
 	string f_in, f_out;
 	
   char * ivalue = NULL;
@@ -302,11 +302,10 @@ int main(int argc, char** argv)
   char * svalue = NULL;
   char * mvalue = NULL;
   char * wvalue = NULL;
-  char * vvalue = NULL;
-  int index;
+
   int c;
 
-  for (int i = 0; i<argc; ++i)  if (argv[i] == "-v") {return -1;}	
+  for (int i = 0; i<argc; ++i)  if (std::string(argv[i]) == "-v") {return -1;}	
 
   opterr = 0;
 
@@ -424,7 +423,7 @@ int main(int argc, char** argv)
 	
 	int hs = 0;
 	
-	int rf=1,rf1,rf2,r1,r2;
+	unsigned int rf=1,rf1,rf2,r1,r2;
 	
 	std::map<int,  int> R2_count;
 	std::map< int, double> R2_avg_weight;
@@ -481,8 +480,8 @@ int main(int argc, char** argv)
 					if (linreg(c1,c2,&m,&b,&r) == 0) {
 						if (abs(abs(m)-1.)*0<0.5) {
 							float fit = m;
-							int f2,r1s,r2s,r1e,r2e;
-							for (int i = 0; i < c1.size(); ++i) {
+							int r1s,r2s,r1e,r2e;
+							for (unsigned int i = 0; i < c1.size(); ++i) {
 								if (m<0) {
 									r1s=c1[i]+c2[i]+lf_len-l2;
 									r1e=c1[i]+c2[i]+lf_len;

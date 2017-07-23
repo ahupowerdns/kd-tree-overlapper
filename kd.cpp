@@ -212,8 +212,7 @@ void tag2(std::string &dna, std::vector<unsigned int> &rcoo) //tagging with regu
 	}
 }
 
-int ns;
-flannmat read_fastq(long int n)
+flannmat read_fastq(long int& ns)
 {
 	int l;
 	int minl = lf_len + 100;
@@ -289,7 +288,9 @@ std::multimap<B,A> flip_map(const std::map<A,B> &src)
 
 using namespace std;
 int main(int argc, char** argv)
-{  float version = 1.0;
+{
+	kseq_destroy(0); // this is a NOP that does silence a warning
+	float version = 1.0;
 	int nn,n_iter;
 	string f_in, f_out;
 	
@@ -376,11 +377,6 @@ int main(int argc, char** argv)
 	else f_out="overlaps.out";
 	if (ivalue != NULL) {
 		fn=ivalue;
-		ifstream f(fn.c_str());
-		if (!f.good()) {
-			printf("Input file %s is not good\n",fn.c_str());
-			return -1;
-		}
 	}
 	else {
 		printf("No input file provided.\n");
@@ -392,14 +388,19 @@ int main(int argc, char** argv)
           version,fn.c_str(), f_out.c_str(), klen, lf_len, tags_div, n_iter);
     
 	fp = gzopen(fn.c_str(), "r");
+	if(!fp) {
+		printf("Input file %s is not good: %s\n",fn.c_str(), strerror(errno));
+		exit(EXIT_FAILURE);
+	}
 	seq = kseq_init(fp);
 
 	populate_kmers_index();
 	
 	start_timer("Loading fastq...\n");
+        long int ns=0;
 	datasets.push_back(read_fastq(ns));
 	
-	printf("Loaded %i tags (%g seconds)\n",ns, stop_timer());
+	printf("Loaded %ld tags (%g seconds)\n",ns, stop_timer());
 	
 	flann::SearchParams params(n_iter, 0.0f,true);
 	params.cores = 16; // for multi-cores to work provide the option for GCC "-fopenmp" in the makefile
@@ -431,6 +432,11 @@ int main(int argc, char** argv)
 
 	FILE * mymhap;
 	mymhap = fopen(f_out.c_str(),"w");
+	if(!mymhap) {
+		fprintf(stderr,"Error opening %s for writing: %s", f_out.c_str(), strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+          
 	
 	std::map<int,int> rec;
 	for ( int i = 0; i < ns; ++i) //for all tags

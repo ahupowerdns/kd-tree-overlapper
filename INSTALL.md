@@ -1,6 +1,6 @@
 # Installation
 
-For convenience, we provide a statically linked `kd` binary here: [https://github.com/dzif/kd-tree-overlapper/releases](https://github.com/dzif/kd-tree-overlapper/releases).
+For convenience, we provide a statically linked `kd` Linux binary here: [https://github.com/dzif/kd-tree-overlapper/releases](https://github.com/dzif/kd-tree-overlapper/releases).
 
 ## Install from source
 

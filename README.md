@@ -18,5 +18,6 @@ Options:
      -n number of ANNs per tag, [40]
      -m minimum allowed distange between tags [200]
      -w window size for GC-peaks detection [100]
+     -v prints version and quit
      -i input FASTA file
 ```

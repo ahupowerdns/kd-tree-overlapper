@@ -10,7 +10,7 @@ Building `kd` from source requires `make` and `cmake`. We have tested `kd` with 
 
 ```
 git clone https://github.com/mariusmuja/flann.git
-libs (If necessary install "cmake"):
+compile libs (If necessary install "cmake"):
 cd flann;
 cmake .;
 make;
